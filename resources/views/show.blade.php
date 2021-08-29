@@ -3,7 +3,8 @@
 @section('title', 'User '.$user->name)
 
 @section('content')
-    <div class="card" style="width: 18rem;">
+    <a class="btn btn-secondary" href="{{ route('users.index') }}">Back</a>
+    <div class="card mt-3" style="width: 18rem;">
         <ul class="list-group list-group-flush">
             <li class="list-group-item">Id: {{ $user->id }}</li>
             <li class="list-group-item">Name: {{ $user->name }}</li>
@@ -13,7 +14,11 @@
         </ul>
     </div>
     <div class="col mt-3">
-        <a class="btn btn-danger" href="{{ route('users.index') }}">Back</a>
-        <a class="btn btn-warning" type="button" href="{{ route('users.edit', $user) }}">Edit</a>
+        <form method="POST" action="{{ route('users.destroy', $user) }}">
+            <a class="btn btn-warning" type="button" href="{{ route('users.edit', $user) }}">Edit</a>
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-danger" type="submit">Delete</button>
+        </form>
     </div>
 @endsection
